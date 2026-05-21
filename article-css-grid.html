@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="From basic 12-column layouts to complex asymmetric grids with named areas and auto-placement.">
+  <title>Mastering CSS Grid | TechLens</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1419'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%233b82f6' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%233b82f6'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <a href="#article-content" class="sr-only">Skip to article content</a>
+
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Tech<span>Lens</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#blog">Blog</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="article-edge-computing.html">Edge</a>
+        <a href="article-css-grid.html" class="active">Grid</a>
+        <a href="article-react-patterns.html">React</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="article-edge-computing.html">Edge Computing</a>
+      <a href="article-css-grid.html">CSS Grid</a>
+      <a href="article-react-patterns.html">React Patterns</a>
+    </nav>
+  </header>
+
+  <div class="article-hero" style="--hero-img: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=500&fit=crop')">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> <span>CSS Grid</span>
+      </nav>
+      <h1>Mastering CSS Grid</h1>
+      <div class="article-meta">
+        <span class="badge">CSS</span>
+        <span>6 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="article-content">
+    <div class="container article-layout">
+      <article class="article-content">
+        <p class="lead">CSS Grid is not just a layout tool — it is a two-dimensional layout system that fundamentally changes how we think about page structure. Unlike Flexbox (which excels at one-dimensional alignment), Grid gives us explicit control over rows and columns simultaneously.</p>
+
+        <h2>Grid vs Flexbox: Different Tools, Same Page</h2>
+        <p>A common misconception is that Grid replaces Flexbox. They serve different purposes and work beautifully together. Grid handles macro layout (page structure, card grids, dashboards), while Flexbox handles micro alignment (centering content within a card, spacing nav links).</p>
+
+        <pre><code>/* Grid for page layout */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-template-areas:
+    "header header"
+    "main   sidebar"
+    "footer footer";
+  gap: 2rem;
+}
+
+/* Flexbox for component alignment */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}</code></pre>
+
+        <h2>The Power of Grid Template Areas</h2>
+        <p>Named grid areas make layouts readable. Instead of counting column numbers, you describe the layout visually in your CSS. This is particularly powerful for responsive design — you can rearrange entire page sections by redefining the template areas at different breakpoints.</p>
+
+        <pre><code>/* Desktop: sidebar on right */
+@media (min-width: 768px) {
+  .layout {
+    grid-template-areas:
+      "main sidebar";
+  }
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 767px) {
+  .layout {
+    grid-template-areas:
+      "main"
+      "sidebar";
+  }
+}</code></pre>
+
+        <h2>Auto-Placement and minmax()</h2>
+        <p>The <code>auto-fill</code> and <code>auto-fit</code> keywords with <code>minmax()</code> create responsive grids without any media queries. The browser calculates how many columns fit at the specified minimum width and distributes remaining space.</p>
+
+        <pre><code>/* Responsive grid with no media queries */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit, 
+    minmax(280px, 1fr)
+  );
+  gap: 1.5rem;
+}</code></pre>
+
+        <p>The difference between <code>auto-fill</code> and <code>auto-fit</code>: auto-fill creates empty tracks when there is extra space, while auto-fit collapses empty tracks, allowing items to stretch wider.</p>
+
+        <h2>Subgrid: The Missing Piece</h2>
+        <p>Subgrid (now supported in all major browsers) allows child elements to inherit the parent grid's track sizing. This solves the longstanding problem of aligning content across sibling grid items.</p>
+
+        <pre><code>.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3; /* header, body, footer */
+}</code></pre>
+
+        <h2>Practical Patterns</h2>
+        <h3>The Holy Grail Layout</h3>
+        <p>Header, footer, main content, and two sidebars — implemented in 5 lines of Grid code that is fully responsive:</p>
+
+        <pre><code>.holy-grail {
+  display: grid;
+  grid-template: auto 1fr auto / 200px 1fr 200px;
+  min-height: 100vh;
+}
+.header { grid-column: 1 / -1; }
+.footer { grid-column: 1 / -1; }</code></pre>
+
+        <h3>Masonry-Style Layout</h3>
+        <p>While native CSS masonry is still experimental, you can approximate it with dense auto-placement and varying row spans:</p>
+
+        <pre><code>.masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 100px;
+  grid-auto-flow: dense;
+}
+.item-tall { grid-row: span 2; }
+.item-wide { grid-column: span 2; }</code></pre>
+
+        <h2>Performance Considerations</h2>
+        <p>Grid layout is calculated by the browser's layout engine and is extremely performant. However, avoid triggering unnecessary reflows by animating grid properties. Prefer animating transforms and opacity on grid items rather than changing their grid placement.</p>
+
+        <blockquote>
+          <p>CSS Grid is declarative layout at its best. Describe what you want, let the browser figure out how to make it work across screen sizes. The fewer media queries you need, the better your grid code is.</p>
+        </blockquote>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <h3>Related Articles</h3>
+          <ul class="related-list">
+            <li><a href="article-edge-computing.html">Why Edge Computing Changes Everything</a></li>
+            <li><a href="article-react-patterns.html">React Patterns That Scale</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>Topics</h3>
+          <div class="tag-pills">
+            <span class="tag-pill">CSS Grid</span>
+            <span class="tag-pill">Flexbox</span>
+            <span class="tag-pill">Layout</span>
+            <span class="tag-pill">Responsive</span>
+          </div>
+        </div>
+        <a href="index.html" class="back-link">Back to all articles</a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>TechLens — Codveda Level 2 Responsive Layout.</p>
+    </div>
+  </footer>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
