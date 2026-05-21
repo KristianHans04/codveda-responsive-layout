@@ -48,6 +48,15 @@ Level-2-Responsive-Layout/
   README.md
 ```
 
+## Live Deployment
+
+| Environment | URL |
+|---|---|
+| Cloudflare Pages | https://codveda-blog.pages.dev |
+| Custom Domain | https://codveda-blog.kristianhans.com |
+
+Deployed via **GitHub auto-deploy**: every push to `main` triggers a new Cloudflare Pages build automatically.
+
 ## Getting Started
 
 ```bash
@@ -55,6 +64,8 @@ git clone https://github.com/KristianHans04/codveda-responsive-layout.git
 cd codveda-responsive-layout
 npx serve .
 ```
+
+Cloudflare Pages project name: `codveda-blog`
 
 ## Accessibility
 
