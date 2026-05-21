@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Why edge computing is transforming how we think about latency, data sovereignty, and application architecture.">
+  <title>Why Edge Computing Changes Everything | TechLens</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1419'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%233b82f6' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%233b82f6'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <a href="#article-content" class="sr-only">Skip to article content</a>
+
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Tech<span>Lens</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#blog">Blog</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="article-edge-computing.html" class="active">Edge</a>
+        <a href="article-css-grid.html">Grid</a>
+        <a href="article-react-patterns.html">React</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="article-edge-computing.html">Edge Computing</a>
+      <a href="article-css-grid.html">CSS Grid</a>
+      <a href="article-react-patterns.html">React Patterns</a>
+    </nav>
+  </header>
+
+  <div class="article-hero" style="--hero-img: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=500&fit=crop')">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> <span>Edge Computing</span>
+      </nav>
+      <h1>Why Edge Computing Changes Everything</h1>
+      <div class="article-meta">
+        <span class="badge">Infrastructure</span>
+        <span>8 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="article-content">
+    <div class="container article-layout">
+      <article class="article-content">
+        <p class="lead">The shift from centralized cloud to distributed edge nodes is not a trend — it is a fundamental architectural evolution. Applications that once tolerated 200ms round trips to a distant origin server now demand sub-20ms responses at the edge of the network.</p>
+
+        <h2>The Latency Problem</h2>
+        <p>Every millisecond of latency costs money. Research from Google shows that a 100ms delay in page load can reduce conversion rates by 7%. For real-time applications — financial trading, autonomous vehicles, AR/VR experiences — latency is not just a performance metric; it is a safety requirement.</p>
+        <p>Traditional cloud architectures route all requests through a centralized data center. Even with CDN caching for static assets, dynamic compute (API calls, database queries, personalization logic) still travels to the origin. Edge computing solves this by pushing compute to the same physical locations that already serve cached content.</p>
+
+        <blockquote>
+          <p>The best request is the one that never has to travel far. Edge computing makes that possible for dynamic workloads, not just static files.</p>
+        </blockquote>
+
+        <h2>How Edge Computing Works</h2>
+        <p>Edge computing platforms like Cloudflare Workers, Deno Deploy, and Vercel Edge Functions run your code in lightweight V8 isolates distributed across hundreds of global locations. When a user in Nairobi makes a request, the code executes in a nearby edge node rather than traveling to a server in Virginia.</p>
+
+        <h3>Key Architectural Differences</h3>
+        <ul>
+          <li><strong>Cold start time:</strong> V8 isolates spin up in under 5ms compared to 200-500ms for containerized functions</li>
+          <li><strong>Memory model:</strong> Isolates share the same process, reducing overhead versus dedicated containers</li>
+          <li><strong>Global distribution:</strong> Code deploys to 200+ locations simultaneously</li>
+          <li><strong>Stateless by default:</strong> Forces clean architectural patterns with external state stores</li>
+        </ul>
+
+        <h2>Data at the Edge</h2>
+        <p>Compute without data access is limited. The next generation of edge databases — Cloudflare D1, Turso (libSQL), PlanetScale — bring data closer to the user. Read replicas distribute globally while writes propagate through consensus protocols.</p>
+
+        <pre><code>// Cloudflare Worker reading from D1
+export default {
+  async fetch(request, env) {
+    const { results } = await env.DB.prepare(
+      "SELECT * FROM products WHERE region = ?"
+    ).bind(getRegion(request)).all();
+    
+    return Response.json(results);
+  }
+}</code></pre>
+
+        <h2>Trade-offs and Limitations</h2>
+        <p>Edge computing is not a silver bullet. Workloads that require heavy computation (ML inference, video transcoding), strong consistency guarantees, or access to large datasets still benefit from centralized architecture. The art is in knowing which parts of your application to push to the edge.</p>
+
+        <h3>When to use edge computing:</h3>
+        <ul>
+          <li>Authentication and authorization checks</li>
+          <li>API gateway logic and rate limiting</li>
+          <li>Content personalization and A/B testing</li>
+          <li>Form validation and submission handling</li>
+          <li>Geographic routing and localization</li>
+        </ul>
+
+        <h3>When centralized cloud is better:</h3>
+        <ul>
+          <li>Machine learning model inference (GPU required)</li>
+          <li>Complex multi-table transactions</li>
+          <li>Long-running batch processing jobs</li>
+          <li>Workloads with heavy inter-service communication</li>
+        </ul>
+
+        <h2>The Future</h2>
+        <p>We are moving toward a hybrid model where applications intelligently split workloads between edge and origin. Smart routing layers analyze request characteristics and direct traffic to the optimal execution environment. The developer experience is converging — write once, deploy everywhere, let the platform decide where to run.</p>
+
+        <blockquote>
+          <p>The cloud is not going away. It is being augmented by a distributed layer that sits closer to users. The winners will be those who understand both and architect for the strengths of each.</p>
+        </blockquote>
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-card">
+          <h3>Related Articles</h3>
+          <ul class="related-list">
+            <li><a href="article-css-grid.html">Mastering CSS Grid</a></li>
+            <li><a href="article-react-patterns.html">React Patterns That Scale</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>Topics</h3>
+          <div class="tag-pills">
+            <span class="tag-pill">Edge Computing</span>
+            <span class="tag-pill">Cloudflare</span>
+            <span class="tag-pill">Performance</span>
+            <span class="tag-pill">Architecture</span>
+          </div>
+        </div>
+        <a href="index.html" class="back-link">Back to all articles</a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>TechLens — Codveda Level 2 Responsive Layout.</p>
+    </div>
+  </footer>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
