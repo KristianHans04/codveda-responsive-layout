@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Responsive tech blog and photography gallery built with CSS Grid and Flexbox. Adapts across desktop (3 columns), tablet (2 columns), and mobile (1 column).">
+  <title>Responsive Layout | Codveda Level 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <a href="#main-content" class="sr-only" onfocus="this.style.clip='auto';this.style.width='auto';this.style.height='auto'" onblur="this.className='sr-only'">Skip to main content</a>
+
+  <!-- Navigation -->
+  <header class="site-nav" role="banner">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">Tech<span>Lens</span></a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#blog" class="active">Blog</a>
+        <a href="#gallery">Gallery</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="#blog">Blog</a>
+      <a href="#gallery">Gallery</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="page-header">
+    <div class="container">
+      <h1>TechLens</h1>
+      <p>Engineering stories, photography, and the craft behind building things that work. Grid and Flexbox in action.</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container">
+      <div class="page-body">
+        <!-- Main Content Column -->
+        <div>
+          <!-- Blog Section -->
+          <section id="blog" aria-labelledby="blog-heading">
+            <h2 id="blog-heading" class="section-heading">Latest Articles</h2>
+            <p class="section-desc">Technical deep-dives, architecture decisions, and lessons from production.</p>
+
+            <div class="blog-grid">
+              <!-- Featured Post (spans full width) -->
+              <article class="blog-card featured">
+                <img
+                  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=450&fit=crop"
+                  alt="Code editor with syntax-highlighted JavaScript on a dark screen"
+                  class="card-image"
+                  loading="eager"
+                  width="800" height="450"
+                >
+                <div class="card-body">
+                  <span class="card-category">Featured</span>
+                  <h3>Why Edge Computing Changes Everything for Full-Stack Developers</h3>
+                  <p class="card-excerpt">Deploying to Cloudflare Workers instead of traditional VPS flipped how we think about latency, cold starts, and database access. Here is what two years of edge-first architecture taught us.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>8 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=338&fit=crop"
+                  alt="Server rack with blinking lights in a data center"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Infrastructure</span>
+                  <h3>Building a Scraping Pipeline That Handles 10K Pages Per Hour</h3>
+                  <p class="card-excerpt">BullMQ, Playwright, and rotating residential proxies. The architecture behind Scrapifie's enterprise-grade web scraping system.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>6 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=338&fit=crop"
+                  alt="Dashboard with data visualization charts and graphs"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Data</span>
+                  <h3>Tracking 20,000 Startups: The Venturely Data Model</h3>
+                  <p class="card-excerpt">How we designed a PostgreSQL schema to track funding rounds, leadership changes, and company signals across the global startup ecosystem.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>5 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&h=338&fit=crop"
+                  alt="Robot arm assembling electronic components"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Robotics</span>
+                  <h3>From Zero to Silver: Coaching Team Kenya at FIRST Global 2025</h3>
+                  <p class="card-excerpt">How we trained high school students who had never programmed a microcontroller to compete in Panama City and win the Silver Medal.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>7 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 5 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=600&h=338&fit=crop"
+                  alt="Mobile phone displaying a Flutter application interface"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Mobile</span>
+                  <h3>AI Plant Identification with Flutter and Gemini</h3>
+                  <p class="card-excerpt">Building PhotoMed: a cross-platform mobile app that identifies medicinal plants using computer vision and maps them with PostGIS.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>6 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 6 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=338&fit=crop"
+                  alt="React component code on a laptop screen"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Frontend</span>
+                  <h3>Three.js Product Mockups for an E-Commerce Platform</h3>
+                  <p class="card-excerpt">How OwnTheJoke renders AI-generated humor on 3D apparel mockups in the browser using Three.js and Gemini for real-time previews.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>5 min read</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 7 -->
+              <article class="blog-card">
+                <img
+                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=338&fit=crop"
+                  alt="Cloudflare network edge node illustration"
+                  class="card-image"
+                  loading="lazy"
+                  width="600" height="338"
+                >
+                <div class="card-body">
+                  <span class="card-category">Edge</span>
+                  <h3>ChamaConnect: Chama Finance on the Cloudflare Stack</h3>
+                  <p class="card-excerpt">Building a full-stack application with Hono, D1, and Workers. JWT auth, contribution tracking, and member transparency reports on the edge.</p>
+                  <div class="card-meta">
+                    <div class="author">
+                      <div class="avatar">KO</div>
+                      <span>Kristian Onjala</span>
+                    </div>
+                    <span>5 min read</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Gallery Section -->
+          <section class="gallery-section" id="gallery" aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading" class="section-heading">Photography Gallery</h2>
+            <p class="section-desc">Shots from engineering events, travels, and the workshops behind the work.</p>
+
+            <div class="gallery-grid">
+              <div class="gallery-item tall">
+                <img
+                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=900&fit=crop"
+                  alt="Team collaborating around laptops at a hackathon"
+                  loading="lazy" width="600" height="900"
+                >
+                <div class="gallery-overlay"><span>Hackathon Nairobi</span></div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=450&fit=crop"
+                  alt="Workshop participants learning electronics"
+                  loading="lazy" width="600" height="450"
+                >
+                <div class="gallery-overlay"><span>Robotics Workshop</span></div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=450&fit=crop"
+                  alt="Small robot on a competition arena"
+                  loading="lazy" width="600" height="450"
+                >
+                <div class="gallery-overlay"><span>Competition Bot</span></div>
+              </div>
+              <div class="gallery-item wide">
+                <img
+                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=514&fit=crop"
+                  alt="Panoramic view of a mountain landscape at golden hour"
+                  loading="lazy" width="1200" height="514"
+                >
+                <div class="gallery-overlay"><span>Sunset Summit</span></div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=450&fit=crop"
+                  alt="Developer pair programming at dual monitors"
+                  loading="lazy" width="600" height="450"
+                >
+                <div class="gallery-overlay"><span>Pair Programming</span></div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop"
+                  alt="Tech conference audience in a large auditorium"
+                  loading="lazy" width="600" height="450"
+                >
+                <div class="gallery-overlay"><span>Tech Conference</span></div>
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=450&fit=crop"
+                  alt="People working on laptops in a bright co-working space"
+                  loading="lazy" width="600" height="450"
+                >
+                <div class="gallery-overlay"><span>Co-Working Space</span></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-label="Blog sidebar">
+          <!-- Tags -->
+          <div class="sidebar-card">
+            <h3>Topics</h3>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Edge Computing</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Robotics</span>
+              <span class="tag">Mobile</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">AI / ML</span>
+              <span class="tag">Three.js</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">Flutter</span>
+              <span class="tag">Web Scraping</span>
+              <span class="tag">Architecture</span>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-card">
+            <h3>Recent Posts</h3>
+            <div class="recent-list">
+              <div class="recent-item">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=128&h=96&fit=crop" alt="" class="thumb" loading="lazy" width="64" height="48">
+                <div class="info">
+                  <h4>Edge Computing Changes Everything</h4>
+                  <span>8 min read</span>
+                </div>
+              </div>
+              <div class="recent-item">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=128&h=96&fit=crop" alt="" class="thumb" loading="lazy" width="64" height="48">
+                <div class="info">
+                  <h4>Scraping Pipeline at Scale</h4>
+                  <span>6 min read</span>
+                </div>
+              </div>
+              <div class="recent-item">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=128&h=96&fit=crop" alt="" class="thumb" loading="lazy" width="64" height="48">
+                <div class="info">
+                  <h4>Venturely Data Model</h4>
+                  <span>5 min read</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="sidebar-card">
+            <h3>Newsletter</h3>
+            <p style="font-size:0.8125rem;color:var(--color-text-secondary);margin-bottom:var(--space-md);line-height:1.55">Engineering insights delivered monthly. No spam.</p>
+            <form class="newsletter-form" aria-label="Newsletter subscription">
+              <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Codveda Web Development Internship - Level 2: Responsive Layout</p>
+    </div>
+  </footer>
+
+  <script src="scripts/navigation.js"></script>
+</body>
+</html>
